@@ -18,54 +18,61 @@
 }
 
 html,
-body {
-  height: 100%;
-  overflow: hidden; /* no scrolling on any device */
-}
-
-body {
+body,
+.page-root {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden !important; /* Strict no scroll on any device */
   background: var(--bg);
   color: var(--fg);
   font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  touch-action: none; /* Prevents pull-to-refresh & mobile bouncing */
 }
 
-/* ── Page root ─────────────────────────────────── */
-.page-root {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-}
-
-/* ── Responsive poster image ────────────────────── */
+/* ── Responsive poster image container ─────────── */
 .poster-wrap {
   position: fixed;
   inset: 0;
   z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
 }
 
 .poster-img {
-  object-fit: cover;
-  object-position: center top;
+  width: 100%;
+  height: 100%;
 }
 
-/* Mobile image — shown by default, full image visible (no crop) */
+/* Mobile image — full height & width containment (no crop, no cut bottom) */
 .mobile-img {
   display: block;
-  object-fit: contain;    /* show whole image, no cutting */
-  object-position: center top;
-  background: #000;       /* letterbox fill colour */
+  object-fit: contain;
+  object-position: center center;
+  background: #000;
 }
 
 /* Desktop image — hidden on mobile */
-.desktop-img { display: none; }
+.desktop-img {
+  display: none;
+}
 
-/* Switch at ≥ 768px */
+/* Switch at ≥ 768px breakpoint for desktop/window */
 @media (min-width: 768px) {
-  .mobile-img  { display: none; }
+  .mobile-img {
+    display: none;
+  }
   .desktop-img {
     display: block;
-    object-fit: cover;     /* desktop fills edge-to-edge */
-    object-position: center;
+    object-fit: contain; /* Full height & width visible without cropping on desktop */
+    object-position: center center;
+    background: #000;
   }
 }
 
@@ -76,7 +83,7 @@ body {
   left: 0;
   width: 100%;
   padding: 1rem 1.5rem;
-  background: rgba(0, 0, 0, 0.82);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   text-align: center;
   z-index: 100;
@@ -117,6 +124,7 @@ body {
   z-index: 1000;
   padding: 1rem;
   backdrop-filter: blur(4px);
+  touch-action: auto;
 }
 
 .modal-content {
@@ -131,6 +139,7 @@ body {
   position: relative;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   animation: modalIn 0.25s ease both;
+  touch-action: pan-y;
 }
 
 @keyframes modalIn {
