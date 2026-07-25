@@ -105,7 +105,7 @@ export default function Home() {
           className="enquire-btn"
           onClick={() => setShowModal(true)}
         >
-          Enquire Now
+          Join The Revolution
         </button>
       </div>
 
@@ -120,7 +120,7 @@ export default function Home() {
             >
               &times;
             </button>
-            <h2 className="modal-title">Enquire Now</h2>
+            <h2 className="modal-title">Join The Revolution</h2>
 
             {success ? (
               <div className="success-msg">
