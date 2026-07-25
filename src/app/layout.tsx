@@ -13,8 +13,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://thewhitecoatrevolution.in'),
   title: "The White Coat Revolution",
   description: "Join the White Coat Revolution – India's biggest medical movement. Register now for Online or Offline participation.",
+  openGraph: {
+    title: "The White Coat Revolution",
+    description: "Join the White Coat Revolution – India's biggest medical movement. Register now for Online or Offline participation.",
+    url: 'https://thewhitecoatrevolution.in',
+    siteName: 'The White Coat Revolution',
+    images: [
+      {
+        url: '/whitecoat.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'The White Coat Revolution Poster',
+      },
+    ],
+    locale: 'en_IN',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

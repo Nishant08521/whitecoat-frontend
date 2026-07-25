@@ -30,14 +30,16 @@ body,
   touch-action: none; /* Prevents pull-to-refresh & mobile bouncing */
 }
 
+.page-root {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ── Responsive poster image container ─────────── */
 .poster-wrap {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
+  position: relative;
+  flex: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,15 +80,14 @@ body,
 
 /* ── Sticky bottom bar ──────────────────────────── */
 .sticky-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   padding: 1rem 1.5rem;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   text-align: center;
   z-index: 100;
+  flex-shrink: 0;
 }
 
 .enquire-btn {
