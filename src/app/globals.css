@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --accent: #e50914;
+  --accent-hover: #cc0000;
+  --success: #16a34a;
+  --error: #dc2626;
+  --border: #ccc;
+  --input-bg: #f9f9f9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* no scrolling on any device */
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+/* ── Page root ─────────────────────────────────── */
+.page-root {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+/* ── Responsive poster image ────────────────────── */
+.poster-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.poster-img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Mobile image — shown by default, full image visible (no crop) */
+.mobile-img {
+  display: block;
+  object-fit: contain;    /* show whole image, no cutting */
+  object-position: center top;
+  background: #000;       /* letterbox fill colour */
+}
+
+/* Desktop image — hidden on mobile */
+.desktop-img { display: none; }
+
+/* Switch at ≥ 768px */
+@media (min-width: 768px) {
+  .mobile-img  { display: none; }
+  .desktop-img {
+    display: block;
+    object-fit: cover;     /* desktop fills edge-to-edge */
+    object-position: center;
+  }
+}
+
+/* ── Sticky bottom bar ──────────────────────────── */
+.sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  z-index: 100;
+}
+
+.enquire-btn {
+  padding: 0.9rem 3.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+  box-shadow: 0 4px 16px rgba(229, 9, 20, 0.4);
+}
+
+.enquire-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(229, 9, 20, 0.55);
+}
+
+.enquire-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Modal overlay ──────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: #fff;
+  color: #222;
+  padding: 2.25rem 2rem;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  animation: modalIn 0.25s ease both;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #111;
+}
+
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.close-btn:hover {
+  color: var(--accent);
+}
+
+/* ── Form fields ────────────────────────────────── */
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+  font-size: 0.88rem;
+  color: #444;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.78rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.97rem;
+  background: var(--input-bg);
+  color: #222;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+.form-group input.input-error {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12) !important;
+}
+
+/* ── Phone row ──────────────────────────────────── */
+.phone-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.phone-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 0.85rem;
+  background: #eee;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #333;
+}
+
+.phone-row input {
+  flex: 1;
+}
+
+/* ── Phone meta (counter / error) ───────────────── */
+.phone-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.35rem;
+  min-height: 1.2rem;
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: var(--error);
+  font-weight: 500;
+}
+
+.field-ok {
+  font-size: 0.8rem;
+  color: var(--success);
+  font-weight: 500;
+}
+
+.digit-count {
+  font-size: 0.78rem;
+  color: #999;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Submit button ──────────────────────────────── */
+.submit-btn {
+  width: 100%;
+  padding: 0.95rem;
+  margin-top: 0.75rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.15s, opacity 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Success state ──────────────────────────────── */
+.success-msg {
+  text-align: center;
+  padding: 2rem 1rem;
+  animation: fadeSlideUp 0.35s ease both;
+}
+
+.success-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.success-msg h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 0.4rem;
+}
+
+.success-msg p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
